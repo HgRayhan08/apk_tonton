@@ -1,5 +1,6 @@
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:core/styles/colors.dart';
+import 'package:core/utils/http_ssl_pinning.dart';
 import 'package:core/utils/routes.dart';
 import 'package:core/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,11 @@ import 'package:tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:tv_series/presentation/pages/watchlist_tv_series_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await HttpSSLPinning.init();
+
   di.init();
   runApp(MyApp());
 }
