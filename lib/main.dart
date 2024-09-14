@@ -36,12 +36,22 @@ import 'package:tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:tv_series/presentation/pages/watchlist_tv_series_page.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await HttpSSLPinning.init();
 
   di.init();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
   runApp(MyApp());
 }
 
